@@ -25,7 +25,7 @@ html {
 
 .banner {
     width: 100vw;
-    height: calc(100vh - 50px);
+    height: calc(80vh - 50px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -81,4 +81,29 @@ div.col {
     height: 80%;
     align-self: center;
     text-align: center;
+}
+
+header[id = "Welcome"]{
+    
+    text-align: center;
+    height: 2vh;
+    padding: 15px;
+}
+
+.persona{
+    display: grid;
+    grid-template-columns: 40% 60%;
+}
+
+div.sign{
+    height: 2vh;
+    margin-left: 15%;
+    font-size: larger;
+}
+
+.name{
+    grid-column: 2;
+    text-align: center;
+    margin-top: 20%;
+    font-size: x-large;
 }
