@@ -1,109 +1,32 @@
-@media only screen and (min-width: 500px) and (max-width: 700px) {
-    body {
-        background-color: #E8F3E9;
-    }
-    .banner {
-        width: 100vw;
-        height: 100vw;
-        max-width: 700px;
-        max-height: 700px;
-        height: calc(100vh - 50px);
-        /* Adjust height for very small screens */
-    }
+/*-------------------------------------
+ * customize material design icon sizes 
+ *-------------------------------------
+ */
+
+.material-icons.md-18 {
+    font-size: 18px;
 }
 
-
-/* Mobile Layout */
-
-body,
-html {
-    margin: 0px;
-    padding: 0px;
-    height: 100%;
-    overflow: hidden;
+.material-icons.md-24 {
+    font-size: 24px;
 }
 
-.banner {
-    width: 100vw;
-    height: calc(80vh - 50px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    background-color: #ffffff;
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+.material-icons.md-36 {
+    font-size: 36px;
 }
 
-.header {
+.material-icons.md-48 {
+    font-size: 48px;
+}
+
+.responsive {
     width: 100%;
-    height: 100%;
-    margin-left: 0;
-    padding-top: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.responsive-img {
-    width: auto;
     height: auto;
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
-    object-fit: contain;
 }
 
-.Container {
-    display: grid;
-    grid-template-columns: 100vw;
-    grid-template-rows: 10vh 80vh 10vh;
-    height: 100vh;
-}
-
-.navContainer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    grid-row: 3 / span 1;
-    background-color: #9DC895;
-    border-radius: 15px;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-}
-
-div.col {
-    border-style: solid;
-    border-color: rgba(14, 21, 10, 0.612);
-    width: 100%;
-    height: 80%;
-    align-self: center;
-    text-align: center;
-}
-
-header[id = "Welcome"]{
-    
-    text-align: center;
-    height: 2vh;
-    padding: 15px;
-}
-
-.persona{
-    display: grid;
-    grid-template-columns: 40% 60%;
-}
-
-div.sign{
-    height: 2vh;
-    margin-left: 15%;
-    font-size: larger;
-}
-
-.name{
-    grid-column: 2;
-    text-align: center;
-    margin-top: 20%;
-    font-size: x-large;
+.rounded-circle {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    /* Centers the circle horizontally */
 }

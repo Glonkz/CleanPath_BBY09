@@ -33,41 +33,34 @@
     <!-------------------------------------------->
     <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
     <link rel="stylesheet" href="./styles/style.css">
-
 </head>
 
 <body>
-    <!------------------------------>
-    <!-- the body of your page goes here -->
-
-    <!------------------------------>
 
     <!-- our own navbar goes here -->
     <nav id="navbarPlaceholder"></nav>
+    <!------------------------------>
+    <div class="container">
+        <h1>Let's Login!</h1>
+    </div>
+    <div id="firebaseui-auth-container"></div>
+    <div id="loader">Loading...</div>
+    <!------------------------------>
+
 
     <!-- the body of your page goes here -->
     <!-- stuff -->
 
     <!-- our own footer goes here-->
     <nav id="footerPlaceholder"></nav>
-    <div class="container text-center py-4">
-        <div class="rounded-circle overflow-hidden">
-            <img class="responsive" src="images/logo.png" alt="">
-        </div>
-        <h1>Welcome to CleanPath App</h1>
-        <h1>Find your way here.!</h1>
-        <a href="login.html" class="btn btn-warning" role="button">Log in</a>
-    </div>
 
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
     <!---------------------------------------------->
     <script src="./scripts/project09.js"></script>
     <script src="./scripts/skeleton.js"></script>
-    <script src="./scripts/script.js"></script>
-    <script>
-        logout(); //make sure user is logged out
-    </script>
+    <script src="./scripts/authentication.js"></script>
+    <!-- <script src="./scripts/script.js"></script> -->
 
 </body>
 

@@ -32,43 +32,36 @@
     <!-- Other libraries and styles of your own -->
     <!-------------------------------------------->
     <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
-    <link rel="stylesheet" href="./styles/style.css">
+    <!-- <link rel="stylesheet" href="./styles/style.css"> -->
 
 </head>
 
 <body>
     <!------------------------------>
-    <!-- the body of your page goes here -->
-
+    <!-- Your HTML Layout go here -->
     <!------------------------------>
 
     <!-- our own navbar goes here -->
     <nav id="navbarPlaceholder"></nav>
-
+    <div class="container-fluid bg-light text-dark p-5">
+        <div class="container bg-light p-5">
+            <h1 class="display-4">Good morning, <span id="name-goes-here"></span></h1>
+            <hr>
+            <p>Quote of the day: The best view comes after the hardest climb.</p>
+        </div>
+    </div>
     <!-- the body of your page goes here -->
     <!-- stuff -->
 
     <!-- our own footer goes here-->
     <nav id="footerPlaceholder"></nav>
-    <div class="container text-center py-4">
-        <div class="rounded-circle overflow-hidden">
-            <img class="responsive" src="images/logo.png" alt="">
-        </div>
-        <h1>Welcome to CleanPath App</h1>
-        <h1>Find your way here.!</h1>
-        <a href="login.html" class="btn btn-warning" role="button">Log in</a>
-    </div>
 
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
     <!---------------------------------------------->
     <script src="./scripts/project09.js"></script>
     <script src="./scripts/skeleton.js"></script>
-    <script src="./scripts/script.js"></script>
-    <script>
-        logout(); //make sure user is logged out
-    </script>
-
+    <script src="./scripts/main.js"></script>
 </body>
 
 </html>
