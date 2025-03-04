@@ -33,6 +33,7 @@
     <!-------------------------------------------->
     <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
     <link rel="stylesheet" href="./styles/style.css">
+    <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
 
 </head>
 
@@ -43,14 +44,14 @@
     <!------------------------------>
 
     <!-- our own navbar goes here -->
-    <nav id="navbarPlaceholder"></nav>
+    <nav class="navbar navbar-expand-lg bg-primary rounded-2">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="./index.html"><span class="nav-title">CleanPath</span></a>
+    </nav>
 
     <!-- the body of your page goes here -->
     <!-- stuff -->
-
-    <!-- our own footer goes here-->
-    <nav id="footerPlaceholder"></nav>
-    <div class="container text-center py-4">
+    <div class="container text-center py-5">
         <div class="rounded-circle overflow-hidden">
             <img class="responsive" src="images/logo.png" alt="">
         </div>
@@ -58,6 +59,18 @@
         <h1>Find your way here.!</h1>
         <a href="login.html" class="btn btn-warning" role="button">Log in</a>
     </div>
+
+    <!-- our own footer goes here-->
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+        <p class="col-md-4 mb-0 text-muted">&copy; 2025 BCIT COMP1800</p>
+        <a href="/"
+            class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+            <svg class="bi me-2" width="40" height="32">
+                <use xlink:href="#bootstrap" />
+            </svg>
+        </a>
+    </footer>    
+    
 
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->

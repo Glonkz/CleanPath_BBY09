@@ -30,3 +30,30 @@
     margin: 0 auto;
     /* Centers the circle horizontally */
 }
+
+body {
+    background-color: #E8F3E9;
+}
+
+.bg-primary {
+    background-color: #9DC895 !important;
+}
+
+.btn-warning {
+    background-color: #9DC895;
+    border-color: #77b46c;
+}
+
+.dropdown-menu {
+    background-color: #94bb8d;
+}
+
+.btn-warning:hover {
+    background-color: #77b46c !important;
+    border-color: #77b46c !important;
+}
+
+.nav-title {
+    color: #596a56;
+    font-size: 22pt;
+}
