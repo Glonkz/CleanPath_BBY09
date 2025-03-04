@@ -8,6 +8,7 @@ var firebaseConfig = {
     storageBucket: "project09-c92d7.firebasestorage.app",
     messagingSenderId: "581821368076",
     appId: "1:581821368076:web:03c98c11ea7498d5f56b29",
+    measurementId: "G-70FST6CSW0"
 };
 
 //--------------------------------------------
