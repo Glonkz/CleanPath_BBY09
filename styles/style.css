@@ -96,4 +96,14 @@ iframe {
     border-radius: 4px;
 }
 
+footer.d-flex {
+    width: 100%;
+    bottom: 18px;
+    left: 8px;
+    position: fixed;
+}
 
+div.container {
+    background-color: black;
+    margin-top: 100px;
+}
