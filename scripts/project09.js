@@ -10,6 +10,16 @@ var firebaseConfig = {
     appId: "1:581821368076:web:03c98c11ea7498d5f56b29",
     measurementId: "G-70FST6CSW0"
 };
+var mapApiConfig = {
+
+    "mapsKey": "5qP3u3nzaMr72TQtAvpMKoMDHEpl9Ljy",
+    "routingKey": "5qP3u3nzaMr72TQtAvpMKoMDHEpl9Ljy>",
+    "searchKey": "5qP3u3nzaMr72TQtAvpMKoMDHEpl9Ljy",
+    "trafficIncidentsKey": "5qP3u3nzaMr72TQtAvpMKoMDHEpl9Ljy",
+    "trafficFlowKey": "5qP3u3nzaMr72TQtAvpMKoMDHEpl9Ljy",
+    "extendedSearchKey": "5qP3u3nzaMr72TQtAvpMKoMDHEpl9Ljy"
+
+}
 
 //--------------------------------------------
 // initialize the Firebase app
