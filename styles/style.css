@@ -33,6 +33,8 @@
 
 body {
     background-color: #E8F3E9;
+    padding: 0px;
+    margin: 0px;
 }
 
 .bg-primary {
@@ -57,3 +59,21 @@ body {
     color: #596a56;
     font-size: 22pt;
 }
+
+div.bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    background-color: #9DC895;
+    height: 50px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+div.nav-item {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-self: center;
+}
+
