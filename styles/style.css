@@ -55,6 +55,10 @@ body {
     border-color: #77b46c !important;
 }
 
+.navbar {
+    border-radius: 0px;
+}
+
 .nav-title {
     color: #596a56;
     font-size: 22pt;
@@ -67,7 +71,7 @@ div.bottom-nav {
     background-color: #9DC895;
     height: 50px;
     width: 100%;
-    border-radius: 10px;
+    border-radius: 2px;
 }
 
 div.nav-item {
@@ -76,4 +80,20 @@ div.nav-item {
     justify-content: center;
     align-self: center;
 }
+
+div.map {
+    margin-top: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    height: 75vh;
+    border: 3.75px solid #596a56;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px rgba(4, 3, 3, 0.433);
+}
+
+iframe {
+    background-color:#819a7d;
+    border-radius: 4px;
+}
+
 
