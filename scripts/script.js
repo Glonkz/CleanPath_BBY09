@@ -2,6 +2,7 @@
 // Your own functions here
 //---------------------------------
 
+console.log('script.js loaded');
 
 function sayHello() {
     //do something

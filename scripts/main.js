@@ -22,3 +22,4 @@ function getNameFromAuth() {
     });
 }
 getNameFromAuth(); //run the function
+

@@ -107,3 +107,31 @@ div.container {
     background-color: black;
     margin-top: 100px;
 }
+
+div.settingContainer {
+    position: relative;
+    background-color: #748671;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px rgba(4, 3, 3, 0.433);
+    margin: 10px;
+    padding: 10px;
+    overflow-y: auto;
+    height: 600px;
+}
+
+button#user-tab.nav-link, button#carbon-tab.nav-link, button#contact-tab.nav-link {
+    color: hsl(113, 11%, 45%);
+}
+
+button#user-tab.nav-link:hover, button#carbon-tab.nav-link:hover, button#contact-tab.nav-link:hover {
+    color: hsl(115, 31%, 76%);
+    background-color: #748371;
+}
+
+#user-tab.nav-link.active, #carbon-tab.nav-link.active, #contact-tab.nav-link.active {
+    background-color: #262926;
+}
+
+#ctl05_ddlCarMake, #ctl05_ddlCarModel, #ctl05_ddlCarDerivative {
+    width: 90px;
+}
