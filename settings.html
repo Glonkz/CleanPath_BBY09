@@ -45,7 +45,7 @@
     <!-- our own navbar goes here -->
     <nav class="navbar navbar-expand-lg bg-primary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="./index.html"><span class="nav-title">CleanPath</span></a>
+          <a class="navbar-brand" href="./main.html"><span class="nav-title">CleanPath</span></a>
           
         </div>
           <div class="bottom-nav">
@@ -82,162 +82,34 @@
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="user-tab-pane" role="tabpanel" aria-labelledby="user-tab" tabindex="0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima vero id adipisci quaerat consectetur porro odio quis, incidunt recusandae sdfsdfvel earum at nam optio ex repellat fugiat aspernatur, reiciendis nulla.
         </div>
-          <div class="tab-pane fade" id="carbon-tab-pane"       role="tabpanel" aria-labelledby="carbon-tab" tabindex="0">
-            <div id="resizable" class="calcpage tabCar" style="font-size: 0.8em;">
-            
-              <div id="pnlTabControl">
-          
-                
-        <table class="layouttable fullwidth">
-            <tbody>
-              <tr>
-                <td class="topleft fullwidth">
-                    <header class="carheading">
-                        <h3>Car carbon footprint calculator</h3>
-                    </header>
-                    <div id="ctl05_valSummary" class="red" style="display:none;"></div>
-                  </td>
-              </tr>
-            </tbody>
-        </table>
-        <table class="gentable">
-            <tbody>
-              <tr>
-                  <td class="gencell"><span id="ctl05_lblMileage">Mileage:</span></td>
-                  <td class="gencell"><table class="layouttable"><tbody><tr><td>
-                  <input name="ctl05$cdsCar$txtMileage" type="text" maxlength="7" id="ctl05_cdsCar_txtMileage" class="numberbox">
-                  <select name="ctl05$cdsCar$ddlMileageUnit" id="ctl05_cdsCar_ddlMileageUnit" class="mediumbox">
-                  <option value="1.6093">miles</option>
-                  <option selected="selected" value="1">km</option>
-                  </select>
-                  <span id="ctl05_cdsCar_rfvMileage" style="visibility:hidden;">*</span>
-                  <span id="ctl05_cdsCar_rgvMileage" style="visibility:hidden;">*</span>
-                  </td></tr></tbody>
-                  </table></td>
-                </tr>
-            <tr>
-                <td class="gencell"><span id="ctl05_lblVehicle">Choose vehicle:</span></td>
-                <td class="gencell"><table class="layouttable"><tbody><tr><td><div class="RadAjaxPanel" id="ctl05_ctl05_ddlCarCountryPanel" style="display: block;">
-                <select name="ctl05$ddlCarCountry" onchange="javascript:setTimeout('__doPostBack(\'ctl05$ddlCarCountry\',\'\')', 0)" id="ctl05_ddlCarCountry" class="dropbox">
-                <option value="Average">Average van, motorbike &amp; car database</option>
-                <option value="EU">EU car database</option>
-                <option value="India">India car database</option>
-                <option selected="selected" value="USA">USA car database</option>
-                </select>
-                </div></td><td><noscript><input type="submit" name="ctl05$btnGo1" value="Go" id="ctl05_btnGo1" class="linkbutton" /></noscript></td></tr></tbody></table></td>
-              </tr>
-            <tr>
-                <td class="gencell">&nbsp;</td>
-                <td class="gencell"><table class="layouttable"><tbody><tr><td>
-          <div class="RadAjaxPanel" id="ctl05_ctl05_ddlCarYearPanel" 
-          style="display: block;">
-                <select name="ctl05$ddlCarYear" onchange="javascript:setTimeout('__doPostBack(\'ctl05$ddlCarYear\',\'\')', 0)" id="ctl05_ddlCarYear" class="dropbox">
-                <option selected="selected" value=""> - select year or type - </option>
-                <option value="1999">1999</option>
-                <option value="2000">2000</option>
-                <option value="2001">2001</option>
-                <option value="2002">2002</option>
-                <option value="2003">2003</option>
-                <option value="2004">2004</option>
-                <option value="2005">2005</option>
-                <option value="2006">2006</option>
-                <option value="2007">2007</option>
-                <option value="2008">2008</option>
-                <option value="2009">2009</option>
-                <option value="2010">2010</option>
-                <option value="2011">2011</option>
-                <option value="2012">2012</option>
-                <option value="2013">2013</option>
-                <option value="2014">2014</option>
-                <option value="2015">2015</option>
-                <option value="2016">2016</option>
-                <option value="2018">2018</option>
-                <option value="2019">2019</option>
-                <option value="2020">2020</option>
-                <option value="Car">Car</option>
-                <option value="Motorbike">Motorbike</option>
-                <option value="Van">Van</option>
-                </select>
-            </div></td><td><noscript><input type="submit" name="ctl05$btnGo2" value="Go" id="ctl05_btnGo2" class="linkbutton" /></noscript></td></tr></tbody></table></td>
-            </tr>
-            <tr>
-                <td class="gencell">&nbsp;</td>
-                <td class="gencell"><table class="layouttable"><tbody><tr><td>
-                <div class="RadAjaxPanel" id="ctl05_ctl05_ddlCarMakePanel" style="display: block;">
-                <select name="ctl05$ddlCarMake" onchange="javascript:setTimeout('__doPostBack(\'ctl05$ddlCarMake\',\'\')', 0)" id="ctl05_ddlCarMake" class="dropbox">
-                </select>
-                </div></td><td><noscript><input type="submit" name="ctl05$btnGo3" value="Go" id="ctl05_btnGo3" class="linkbutton" /></noscript></td></tr></tbody></table></td>
-              </tr>
-            <tr>
-                <td class="gencellright"><div class="RadAjaxPanel" id="ctl05_ctl05_btnClearPanel" style="display: block;">
-        
-          </div></td>
-                <td class="gencell"><table class="layouttable"><tbody><tr><td><div class="RadAjaxPanel" id="ctl05_ctl05_ddlCarModelPanel" style="display: block;">
-            <select name="ctl05$ddlCarModel" onchange="javascript:setTimeout('__doPostBack(\'ctl05$ddlCarModel\',\'\')', 0)" id="ctl05_ddlCarModel" class="dropbox">
-        
-            </select>
-          </div></td><td><noscript><input type="submit" name="ctl05$btnGo4" value="Go" id="ctl05_btnGo4" class="linkbutton" /></noscript></td></tr></tbody></table></td>
-            </tr>
-            <tr>
-                <td class="gencell">&nbsp;</td>
-                <td class="gencell"><table class="layouttable"><tbody><tr><td><div class="RadAjaxPanel" id="ctl05_ctl05_ddlCarDerivativePanel" style="display: block;">
-            <select name="ctl05$ddlCarDerivative" onchange="javascript:setTimeout('__doPostBack(\'ctl05$ddlCarDerivative\',\'\')', 0)" id="ctl05_ddlCarDerivative" class="dropbox">
-        
-            </select>
-          </div></td><td><noscript><input type="submit" name="ctl05$btnGo5" value="Go" id="ctl05_btnGo5" class="linkbutton" /></noscript></td></tr></tbody></table></td>
-            </tr>
-            <tr>
-                <td class="gencell"><span id="ctl05_lblEfficiency">Or enter efficiency:</span></td>
-                <td class="gencell"><table class="layouttable"><tbody><tr><td><div class="RadAjaxPanel" id="ctl05_ctl05_cefCarPanel" style="display: block;">
-            <input name="ctl05$cefCar$txtEfficiency" type="text" maxlength="7" id="ctl05_cefCar_txtEfficiency" class="numberbox">
-        <input type="hidden" name="ctl05$cefCar$hidUseUplift" id="ctl05_cefCar_hidUseUplift" value="True">
-        <select name="ctl05$cefCar$ddlEfficiencyUnit" id="ctl05_cefCar_ddlEfficiencyUnit" class="mediumbox">
-              <option selected="selected" value="1">g/km</option>
-              <option value="10">L/100km</option>
-              <option value="-2824.9">mpg (UK)</option>
-              <option value="-2352.2">mpg (US)</option>
-        
-            </select>
-        <select name="ctl05$cefCar$ddlFuel" id="ctl05_cefCar_ddlFuel" class="mediumbox">
-              <option selected="selected" value="2.0844">petrol</option>
-              <option value="2.51279">diesel</option>
-              <option value="1.55713">LPG</option>
-              <option value="0.44942">CNG</option>
-        
-            </select>
-        <span id="ctl05_cefCar_rfvEfficiency" style="visibility:hidden;">*</span>
-        <span id="ctl05_cefCar_rgvEfficiency" style="visibility:hidden;">*</span>
-          </div></td></tr></tbody></table></td>
-            </tr>
-        </tbody></table>
-        <div class="calcbutton"><input type="submit" name="ctl05$btnAddCar" value="Calculate &amp; Add To Footprint" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl05$btnAddCar&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, false))" id="ctl05_btnAddCar" class="cfp"></div>
-        
-        <div id="ctl05_RadAjaxManager1SU" style="display: none;">
-            <span id="ctl05_RadAjaxManager1" style="display:none;"></span>
-          </div>    
-        </div>
-                <div id="pnlTabSummary">
-          
-                    <p class="error"><span id="lblMaxReached"></span></p>
-                    <table class="offsetlink">
-                      <tbody><tr>
-                          <td class="offsetlinkcell"><h3 class="nomargin"><span id="lblTabTotal">Total Car Footprint = 0.00 tonnes of CO<span class="co2">2</span>e</span></h3></td>
-                      </tr>
-                  </tbody></table>
-                    
-                    <div>
-            
-          </div>
-                
-          </div>
-                
-            
+        <div class="tab-pane fade" id="carbon-tab-pane" role="tabpanel" aria-labelledby="carbon-tab" tabindex="0">
+            <h1>Carbon Emission</h1>
+              <form id="emissionForm">
+                <label>Select Fuel Type:</label>
+                <label><input type="radio" name="fuelType" value="gasoline"> Gasoline</label>
+                <label><input type="radio" name="fuelType" value="diesel"> Diesel</label>
+
+                  <br>
+
+                <label for="consumption">Fuel Consumption (L/100 km):</label>
+                <input type="number" id="consumption" step="0.1" required>
+                  <br>
+                <label for="distance">Travel Distance (km):</label>
+                <input type="number" id="distance" required>
+                  <br>
+                <button type="button" onclick="calculateEmissions()">Calculate</button>
+                <button type="button" class="reset-button" onclick="resetForm()">Reset</button>
+
+              </form>
+            <div class="carbonResults">
+              <h2>Carbon Emissions (C0₂)</h2>
+              <p id="carbonResults"></p>
             </div>
           </div>
-            <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae aliquid eligendi ipsum, possimus, velit necessitatibus quaerat rem ullam est, inventore incidunt assumenda ipsam perspiciatis! Facere delectus dignissimos vitae reiciendis consequatur.</div>
-          </div>
+          <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repudiandae aliquid eligendi ipsum, possimus, velit necessitatibus quaerat rem ullam est, inventore incidunt assumenda ipsam perspiciatis! Facere delectus dignissimos vitae reiciendis consequatur.</div>
+        </div>
       </div>
-
+    </div>
     <!-- our own footer goes here-->
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <p class="col-md-4 mb-0 text-muted">&copy; 2025 BCIT COMP1800</p>
@@ -255,7 +127,7 @@
     <script src="./scripts/project09.js"></script>
     <script src="./scripts/skeleton.js"></script>
     <script src="./scripts/main.js"></script>
-    <script type="text/javascript" src="/assets/jquery-1-12-2-min.js"></script>
+    <script src="./scripts/emissions.js"></script>
 </body>
 
 </html>

@@ -38,12 +38,13 @@ body {
 }
 
 .bg-primary {
-    background-color: #9DC895 !important;
+    background-color: #5e6f5ee8 !important;
 }
 
 .btn-warning {
-    background-color: #9DC895;
-    border-color: #77b46c;
+    background-color: #5e6f5e;
+    border-color: #5e6f5e;
+    color: #c1eaba;
 }
 
 .dropdown-menu {
@@ -51,8 +52,8 @@ body {
 }
 
 .btn-warning:hover {
-    background-color: #77b46c !important;
-    border-color: #77b46c !important;
+    background-color: #E8F3E9 !important;
+    border-color: #3c493a !important;
 }
 
 .navbar {
@@ -60,7 +61,7 @@ body {
 }
 
 .nav-title {
-    color: #596a56;
+    color: #b0d1b0;
     font-size: 22pt;
 }
 
@@ -68,7 +69,7 @@ div.bottom-nav {
     display: flex;
     position: fixed;
     bottom: 0;
-    background-color: #9DC895;
+    background-color: #5e6f5ee8;
     height: 50px;
     width: 100%;
     border-radius: 2px;
@@ -79,6 +80,7 @@ div.nav-item {
     width: 100%;
     justify-content: center;
     align-self: center;
+    color: #b0d1b0;
 }
 
 div.map {
@@ -104,7 +106,6 @@ footer.d-flex {
 }
 
 div.container {
-    background-color: black;
     margin-top: 100px;
 }
 
@@ -117,6 +118,7 @@ div.settingContainer {
     padding: 10px;
     overflow-y: auto;
     height: 600px;
+    color: #2d362d;
 }
 
 button#user-tab.nav-link, button#carbon-tab.nav-link, button#contact-tab.nav-link {
@@ -134,4 +136,53 @@ button#user-tab.nav-link:hover, button#carbon-tab.nav-link:hover, button#contact
 
 #ctl05_ddlCarMake, #ctl05_ddlCarModel, #ctl05_ddlCarDerivative {
     width: 90px;
+}
+
+input#consumption, input#distance {
+    width: 100px;
+    background-color: #748671;
+    border-radius: 10px;
+    border-color: #748671;
+    box-shadow: 0px 5px 10px rgba(4, 3, 3, 0.231);
+    margin: 10px;
+    color: #b0d1b0;
+}
+
+input#consumption:hover, input#distance:hover {
+    background-color: #5e6f5e;
+}
+
+button {
+    background-color: #5e6f5e;
+    border-radius: 10px;
+    border-color: #748671;
+    box-shadow: 0px 5px 10px rgba(4, 3, 3, 0.11);
+    margin: 3px;
+    color: #2d362d;
+}
+
+button:hover {
+    background-color: #748671;
+    color: #b0d1b0;
+}
+
+form#emissionForm {
+    margin-bottom: 20px;
+}
+
+div.settingContainer h1, div.settingContainer h2 {
+    background-color: #5e6f5e;
+    width: fit-content;
+    border-radius: 5px;
+    padding: 5px;
+    padding-left: 6px;
+    padding-right: 6px;
+    box-shadow: 0px 5px 10px rgba(4, 3, 3, 0.298);
+}
+
+p#carbonResults {
+    font-weight: bold;
+    font-size: large;
+    color: #bce6bc;
+    text-decoration: underline;
 }
