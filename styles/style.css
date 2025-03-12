@@ -85,16 +85,23 @@ div.nav-item {
 
 #map {
     position: absolute;
-    top: 15%;
+    top: 10%;
     bottom: 10%;
     width: 100%;
-    height: auto
+    height: auto;
+    border: #5e6f5e solid 2px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px rgba(4, 3, 3, 0.433);
 }
 
-iframe {
+    a.mapboxgl-ctrl-logo {
+        display: none;
+    }
+
+/* iframe {
     background-color:#819a7d;
     border-radius: 4px;
-}
+} */
 
 footer.d-flex {
     width: 100%;
