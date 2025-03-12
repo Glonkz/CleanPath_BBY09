@@ -83,14 +83,12 @@ div.nav-item {
     color: #b0d1b0;
 }
 
-div.map {
-    margin-top: 50px;
-    margin-left: 50px;
-    margin-right: 50px;
-    height: 75vh;
-    border: 3.75px solid #596a56;
-    border-radius: 10px;
-    box-shadow: 0px 5px 10px rgba(4, 3, 3, 0.433);
+#map {
+    position: absolute;
+    top: 15%;
+    bottom: 10%;
+    width: 100%;
+    height: auto
 }
 
 iframe {
