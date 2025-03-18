@@ -143,8 +143,8 @@ button#user-tab.nav-link:hover, button#carbon-tab.nav-link:hover, button#contact
     width: 90px;
 }
 
-input#consumption, input#distance {
-    width: 100px;
+input#consumption, input#distance, input#address {
+    width: 150px;
     background-color: #748671;
     border-radius: 10px;
     border-color: #748671;
@@ -153,8 +153,17 @@ input#consumption, input#distance {
     color: #b0d1b0;
 }
 
-input#consumption:hover, input#distance:hover {
+input#consumption:hover, input#distance:hover, input#address:hover {
     background-color: #5e6f5e;
+}
+
+input::placeholder {
+    color: #b0d1b0;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+    border-color: #9ebc9e;
+    outline: none;
 }
 
 button {
