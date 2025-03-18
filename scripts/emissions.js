@@ -48,3 +48,12 @@ function resetForm() {
     //Clear result text
     document.getElementById("carbonResults").innerText = "";
 }
+
+//function to make the report system work
+function report(){
+    const btn = document.getElementById("reportForm");
+    const txt = document.getElementById("address");
+    //we cant add a databse but this button onclick would
+    //add the string inputed into the address into the database
+    btn.onclick();
+}
