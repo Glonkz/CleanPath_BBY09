@@ -1,3 +1,5 @@
+const Address = require("ipaddr.js");
+
 //Emisson factor (kg, C02/L)
 const emissionFactors = {
     gasoline: 2.31,
@@ -51,9 +53,7 @@ function resetForm() {
 
 //function to make the report system work
 function report(){
-    const btn = document.getElementById("reportForm");
     const txt = document.getElementById("address");
-    //we cant add a databse but this button onclick would
-    //add the string inputed into the address into the database
-    btn.onclick();
+    // this doesnt work for some god forsaken reason
+    db.collection('reports').doc(reports.uid).set({street: txt.innerHTML});
 }

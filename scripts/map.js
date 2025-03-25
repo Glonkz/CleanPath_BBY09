@@ -3,9 +3,12 @@ const map = new mapboxgl.Map({
   container: 'map',
   // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
   style: 'mapbox://styles/mapbox/streets-v11',
+
   center: [-123., 49.24],
   zoom: 13
 });
+
+const searchBar = document.getElementsByClassName("mapboxgl-ctrl-geocoder mapboxgl-ctrl");
 
 const geocoder = new MapboxGeocoder({
   accessToken: mapboxgl.accessToken,
@@ -93,7 +96,8 @@ map.on('load', () => {
 });
 
 map.on('click', (event) => {
-  const coords = [Object.keys(event.lngLat).map((key) => event.lngLat[key])];
+
+  const coords = Object.keys(event.lngLat).map((key) => event.lngLat[key]);
   const end = {
     type: 'FeatureCollection',
     features: [
