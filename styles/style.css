@@ -83,6 +83,23 @@ div.nav-item {
     color: #b0d1b0;
 }
 
+div.logout {
+    border: solid #93b093;
+    border-radius: 8px;
+    padding: 3px;
+}
+
+a {
+    color: #a1c0a1;
+    text-decoration: none;
+}
+
+div.logout:hover {
+    cursor: pointer;
+    color: hsl(115, 31%, 76%);
+    background-color: #748371;
+}
+
 #map {
     position: absolute;
     top: 10%;

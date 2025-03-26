@@ -1,5 +1,3 @@
-const Address = require("ipaddr.js");
-
 //Emisson factor (kg, C02/L)
 const emissionFactors = {
     gasoline: 2.31,
@@ -53,7 +51,13 @@ function resetForm() {
 
 //function to make the report system work
 function report(){
+    const btn = document.getElementById("reportForm");
     const txt = document.getElementById("address");
+    btn.onclick();
     // this doesnt work for some god forsaken reason
     db.collection('reports').doc(reports.uid).set({street: txt.innerHTML});
 }
+
+//Needs work, dont put code at the top unless it works.
+//Messes up the calculate button for emissions.
+// const Address = require("ipaddr.js");
