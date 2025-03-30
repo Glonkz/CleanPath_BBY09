@@ -5,16 +5,14 @@ function getNameFromAuth() {
             // Do something for the currently logged-in user here: 
             console.log(user.uid); //print the uid in the browser console
             console.log(user.displayName); //print the user name in the browser console
-            userName = user.displayName;
+            const userName = user.displayName;
 
-            //method #1:  insert with JS
-            //document.getElementById("name-goes-here").innerText = userName;    
-
-            //method #2:  insert using jquery
-            //$("#name-goes-here").text(userName); //using jquery
-
-            document.querySelector("#name-goes-here").innerText = userName
-
+            const nameElement = document.querySelector("#name-goes-here");
+            if (nameElement) {
+                nameElement.innerText = userName;
+            } else {
+                console.log("Element not found in DOM.")
+            }
         } else {
             // No user is signed in.
             console.log("No user is logged in");

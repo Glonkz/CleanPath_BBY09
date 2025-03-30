@@ -3,7 +3,7 @@ var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
 //Function to get current date.
 function getCurrentDate() {
-    return new Date().toISOString();
+    return firebase.firestore.Timestamp.fromDate(new Date());
 }
 
 //Function to set the current day of users time.
@@ -32,10 +32,10 @@ var uiConfig = {
 
             if (authResult.additionalUserInfo.isNewUser) {
                 db.collection("users").doc(user.uid).set(userData)
-                .then(() => {
-                    console.log("New user added to Firestore");
-                    window.location.assign("main.html");
-                })
+                    .then(() => {
+                        console.log("New user added to Firestore");
+                        window.location.assign("main.html");
+                    })
                     .catch((error) => {
                         console.error("Error adding user: ", error);
                     });
@@ -43,9 +43,9 @@ var uiConfig = {
                 db.collection("users").doc(user.uid).update({
                     email: user.email,
                     lastSignInDate: getCurrentDate(),
-                    weeklyCarbonScore: "0",
-                    currentCarbonScore: "0",
-                    totalCarbonScore: "0",
+                    // weeklyCarbonScore: "0.00",
+                    // currentCarbonScore: "0.00",
+                    // totalCarbonScore: "0.00",
                     day: getCurrentDay()
                 })
                     .then(() => {
@@ -76,9 +76,7 @@ var uiConfig = {
     signInSuccessUrl: "main.html",
     signInOptions: [
         firebase.auth.EmailAuthProvider.PROVIDER_ID
-    ],
-    tosUrl: '<your.tos.url>',
-    privacyPolicyUrl: '<your-privacy-policy-url>'
+    ]
 };
 
 ui.start('#firebaseui-auth-container', uiConfig);
