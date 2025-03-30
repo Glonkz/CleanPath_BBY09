@@ -3,7 +3,14 @@ var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
 //Function to get current date.
 function getCurrentDate() {
-    return firebase.firestore.Timestamp.fromDate(new Date());
+    return new Date().toISOString();
+}
+
+//Function to set the current day of users time.
+function getCurrentDay() {
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const current = new Date();
+    return days[current.getDay()];
 }
 
 var uiConfig = {
@@ -19,7 +26,8 @@ var uiConfig = {
                 lastSignInDate: getCurrentDate(),
                 weeklyCarbonScore: "0000",
                 currentCarbonScore: "000",
-                day: "Sunday"
+                totalCarbonScore: "0000",
+                day: getCurrentDay()
             };
 
             if (authResult.additionalUserInfo.isNewUser) {
@@ -35,8 +43,10 @@ var uiConfig = {
                 db.collection("users").doc(user.uid).update({
                     email: user.email,
                     lastSignInDate: getCurrentDate(),
-                    weeklyCarbonScore: "new_value",
-                    currentCarbonScore: "new_value"
+                    weeklyCarbonScore: "0",
+                    currentCarbonScore: "0",
+                    totalCarbonScore: "0",
+                    day: getCurrentDay()
                 })
                     .then(() => {
                         console.log("Existing user data updated");

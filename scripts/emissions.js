@@ -4,6 +4,20 @@ const emissionFactors = {
     diesel: 2.68
 };
 
+//Function to update Firestore with th new carbon scores
+function updateCarbonScores(emissions) {
+    const user = firebase.auth().currentUser;
+    const userId = user.uid;
+    const userRef = db.collection("users").doc(userId);
+
+    //Updating the scores
+
+
+
+
+}
+
+
 //Getting the selected fuel type
 function calculateEmissions() {
     const fuelRadioButton = document.querySelectorAll('input[name="fuelType"]:checked');
