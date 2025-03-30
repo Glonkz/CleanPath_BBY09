@@ -1,34 +1,74 @@
 // Initialize the FirebaseUI Widget using Firebase.
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+//Function to get current date.
+function getCurrentDate() {
+    return firebase.firestore.Timestamp.fromDate(new Date());
+}
+
 var uiConfig = {
     callbacks: {
-        signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-            // User successfully signed in.
-            // Return type determines whether we continue the redirect automatically
-            // or whether we leave that to developer to handle.
-            return true;
+        signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+            var user = authResult.user;
+            console.log("Succesful sign-in for user: ", user.id);
+
+            //Data to update fireStore
+            const userData = {
+                name: user.displayName,
+                email: user.email,
+                lastSignInDate: getCurrentDate(),
+                weeklyCarbonScore: "0000",
+                currentCarbonScore: "000",
+                day: "Sunday"
+            };
+
+            if (authResult.additionalUserInfo.isNewUser) {
+                db.collection("users").doc(user.uid).set(userData)
+                .then(() => {
+                    console.log("New user added to Firestore");
+                    window.location.assign("main.html");
+                })
+                    .catch((error) => {
+                        console.error("Error adding user: ", error);
+                    });
+            } else {
+                db.collection("users").doc(user.uid).update({
+                    email: user.email,
+                    lastSignInDate: getCurrentDate(),
+                    weeklyCarbonScore: "new_value",
+                    currentCarbonScore: "new_value"
+                })
+                    .then(() => {
+                        console.log("Existing user data updated");
+                        window.location.assign("main.html");
+                    })
+                    .catch((error) => {
+                        console.error("Error updating existing user: ", error);
+
+                        //Create doc if use doesn't exist
+                        if (error.code === "not-found") {
+                            db.collection("users").doc(user.uid).set(userData)
+                                .then(() => {
+                                    console.log("Created document for existing user");
+                                    window.location.assign("main.html");
+                                });
+                        }
+                    });
+            }
+            return false;
         },
-        uiShown: function() {
-            // The widget is rendered.
-            // Hide the loader.
+        uiShown: function () {
             document.getElementById('loader').style.display = 'none';
         }
     },
-    // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+
     signInFlow: 'popup',
     signInSuccessUrl: "main.html",
     signInOptions: [
-        // Leave the lines as is for the providers you want to offer your users.
-        //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-        //firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-        //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-        //firebase.auth.GithubAuthProvider.PROVIDER_ID,
-        firebase.auth.EmailAuthProvider.PROVIDER_ID,
-        //firebase.auth.PhoneAuthProvider.PROVIDER_ID
+        firebase.auth.EmailAuthProvider.PROVIDER_ID
     ],
-    // Terms of service url.
-    tosUrl: '<your-tos-url>',
-    // Privacy policy url.
+    tosUrl: '<your.tos.url>',
     privacyPolicyUrl: '<your-privacy-policy-url>'
 };
+
 ui.start('#firebaseui-auth-container', uiConfig);

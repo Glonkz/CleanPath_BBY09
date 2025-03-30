@@ -2,8 +2,6 @@
 // Your own functions here
 //---------------------------------
 
-console.log('script.js loaded');
-
 function sayHello() {
     //do something
 }
@@ -16,7 +14,9 @@ function logout() {
     firebase.auth().signOut().then(() => {
         // Sign-out successful.
         console.log("logging out user");
+        
     }).catch((error) => {
+        console.error("An error during logout: ", error);
         // An error happened.
     });
 }
