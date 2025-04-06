@@ -66,7 +66,7 @@ async function getRoute(end) {
 map.on('load', () => {
   // make an initial directions request that
   // starts and ends at the same location
-  getRoute(start);
+  getRoute(userCoords);
 
   // Add starting point to the map
   map.addLayer({
@@ -82,7 +82,7 @@ map.on('load', () => {
             properties: {},
             geometry: {
               type: 'Point',
-              coordinates: start
+              coordinates: userCoords
             }
           }
         ]
