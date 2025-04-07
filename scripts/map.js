@@ -178,6 +178,8 @@ function updateLocationWithGPS() {
           zoom: 15 
         });
 
+   
+
         //Update the existing route if any
         if (map.getLayer('end')) {
           const endCoords = map.getSource('end')._data.features[0].geometry.coordinates;
@@ -231,3 +233,5 @@ map.addControl({
     gpsControl.parentNode.removeChild(gpsControl);
   }
 }, 'top-right');
+
+
