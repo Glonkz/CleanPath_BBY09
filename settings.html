@@ -35,7 +35,7 @@
   <!-------------------------------------------->
   <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
   <link rel="stylesheet" href="./styles/style.css">
-  <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="./images/logo.ico" type="image/x-icon">
 
 
 </head>
@@ -80,24 +80,20 @@
       <button class="nav-link" id="carbon-tab" data-bs-toggle="tab" data-bs-target="#carbon-tab-pane" type="button"
         role="tab" aria-controls="carbon-tab-pane" aria-selected="false">Carbon</button>
     </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button"
-        role="tab" aria-controls="contact-tab-pane" aria-selected="false">Contact</button>
-    </li>
   </ul>
+
   <div class="settingContainer">
+
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="user-tab-pane" role="tabpanel" aria-labelledby="user-tab" tabindex="0">
         <h1>User Profile </h1>
-        <form>
           <fieldset class="mb-3" id="personalInfoFields" disabled>
             <div class="form-group">
               <label>Name</label>
               <input type="text" id="nameInput" class="form-control" placeholder="Enter your name">
             </div>
-              <label>City</label>
-              <input type="text" id="cityInput" class="form-control" placeholder="Enter your city">
-            </div>
+            <label>City</label>
+            <input type="text" id="cityInput" class="form-control" placeholder="Enter your city">
           </fieldset>
           <div class="d-flex justify-content-end mt-5">
             <button type="button" class="editUser" onclick="editUserInfo()">Edit</button>
@@ -105,50 +101,36 @@
             <button type="button" class="saveUser" onclick="saveUserInfo()">Save</button>
           </div>
       </div>
-      <div class="tab-pane fade" id="carbon-tab-pane" role="tabpanel" aria-labelledby="carbon-tab" tabindex="0">
-        <h1>Carbon Emission</h1>
-        <form id="emissionForm">
-          <label>Select Fuel Type:</label>
-          <label><input type="radio" name="fuelType" value="gasoline"> Gasoline</label>
-          <label><input type="radio" name="fuelType" value="diesel"> Diesel</label>
-
-          <br>
-
-          <label for="consumption">Fuel Consumption (L/100 km):</label>
-          <input type="number" id="consumption" step="0.1" placeholder="Enter fuel" required>
-          <br>
-          <label for="distance">Travel Distance (km):</label>
-          <input type="number" id="distance" placeholder="Enter distance" required>
-          <br>
-          <button type="button" onclick="calculateEmissions()">Calculate</button>
-          <button type="button" class="reset-button" onclick="resetForm()">Reset</button>
-
-        </form>
-        <div class="carbonResults">
-          <h2>Carbon Emissions (C0₂)</h2>
-          <p id="carbonResults"></p>
-        </div>
-        <form>
-          <h3>Report Carbon</h3>
-          <input type="text" required placeholder="Enter an address" id="address">
-          <button type="button" id="reportForm" onclick="report()">
-            <h4>Report</h4>
-          </button>
-        </form>
-      </div>
-      <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
-        <strong>About us:<br></strong>
-        Name: Jaspreet Bath, (jacobs names)<br>
-        Email: jaspreetbath98@gmail.com, (jacobs email)<br>
-        <br>
-        <strong>Our reason:</strong><br>
-        As technology grows and people's awareness in the enivorment grows, our team thought of an idea to allow users
-        to use our app to contribute to the enivorment.<br> <br>
-        Not only does it bring others together as a community, but also helps those that have problems breathing. Its a
-        way for others to keep themselves healthy and the world around them!
-      </div>
     </div>
-  </div>
+
+    <div class="tab-pane fade" id="carbon-tab-pane" role="tabpanel" aria-labelledby="carbon-tab" tabindex="0">
+      <h1>Carbon Emission</h1>
+      <form id="emissionForm">
+        <label>Select Fuel Type:</label>
+        <label><input type="radio" name="fuelType" value="gasoline"> Gasoline</label>
+        <label><input type="radio" name="fuelType" value="diesel"> Diesel</label>
+        <br>
+        <label for="consumption">Fuel Consumption (L/100 km):</label>
+        <input type="number" id="consumption" step="0.1" placeholder="Enter fuel" required>
+        <br>
+        <label for="distance">Travel Distance (km):</label>
+        <input type="number" id="distance" placeholder="Enter distance" required>
+        <br>
+        <button type="button" onclick="calculateEmissions()">Calculate</button>
+        <button type="button" class="reset-button" onclick="resetForm()">Reset</button>
+      </form>
+      <div class="carbonResults">
+        <h2>Carbon Emissions (C0₂)</h2>
+        <p id="carbonResults"></p>
+      </div>
+      <form>
+        <h3>Report Carbon</h3>
+        <input type="text" required placeholder="Enter an address" id="address">
+        <button type="button" id="reportForm" onclick="report()">
+          <h4>Report</h4>
+        </button>
+      </form>
+    </div>
   </div>
   <!-- our own footer goes here-->
   <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">

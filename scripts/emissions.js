@@ -117,7 +117,7 @@ function report() {
 
     // This doesnt work for some god forsaken reason.
     //Ahem, tis now working now, Parise thine....MUAHHAHAHAHAHAHAH.
-    db.collection("reports").doc(user.uid).set({
+    db.collection('reports').doc(user.uid).set({
         // street: txt.innerHTML, <- Your code
         street: streetAddress,
         userId: user.uid,

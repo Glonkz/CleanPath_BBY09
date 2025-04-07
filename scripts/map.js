@@ -22,8 +22,7 @@ const start = [-123, 49.24];
 async function getRoute(end) {
   const query = await fetch(
     `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
-    { method: 'GET' },
-
+    { method: 'GET' }
   );
   const json = await query.json();
   const data = json.routes[0];
@@ -65,7 +64,7 @@ async function getRoute(end) {
 map.on('load', () => {
   // make an initial directions request that
   // starts and ends at the same location
-  getRoute(userCoords);
+  getRoute(start);
 
   // Add starting point to the map
   map.addLayer({
@@ -81,7 +80,7 @@ map.on('load', () => {
             properties: {},
             geometry: {
               type: 'Point',
-              coordinates: userCoords
+              coordinates: start
             }
           }
         ]

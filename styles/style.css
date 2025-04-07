@@ -140,7 +140,7 @@ div.settingContainer {
     margin: 10px;
     padding: 10px;
     overflow-y: auto;
-    height: 600px;
+    height: 620px;
     color: #2d362d;
 }
 
@@ -184,7 +184,7 @@ input[type="text"]:focus, input[type="number"]:focus {
     outline: none;
 }
 
-button {
+button, button.editUser, button.saveUser {
     background-color: #5e6f5e;
     border-radius: 10px;
     border-color: #748671;
@@ -193,7 +193,7 @@ button {
     color: #2d362d;
 }
 
-button:hover {
+button:hover, button.editUser:hover, button.saveUser:hover {
     background-color: #748671;
     color: #b0d1b0;
 }
