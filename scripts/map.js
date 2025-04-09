@@ -28,7 +28,6 @@ async function getRoute(end) {
   const query = await fetch(
     `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
     { method: 'GET' }
-    { method: 'GET' }
   );
   const json = await query.json();
   const data = json.routes[0];
