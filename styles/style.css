@@ -218,3 +218,10 @@ p#carbonResults {
     color: #bce6bc;
     text-decoration: underline;
 }
+
+#currentCarbonScore, #weeklyCarbonScore, #totalCarbonScore {
+    font-weight: bold;
+    font-size: large;
+    color: #4d634d;
+    text-decoration: underline;
+}
