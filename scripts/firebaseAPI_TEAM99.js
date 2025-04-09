@@ -1,3 +1,7 @@
+import { getFirestore, collection, addDoc, Timestamp, getDocs } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js';
+import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js';
+
 //----------------------------------------
 //  Your web app's Firebase configuration
 //----------------------------------------
@@ -26,5 +30,10 @@ var mapApiConfig = {
 // initialize the Firebase app
 // initialize Firestore database if using it
 //--------------------------------------------
-const app = firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+// Initialize Firestore (if using Firestore)
+const db = getFirestore(app);
+
+export {db};

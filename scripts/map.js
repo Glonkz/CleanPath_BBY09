@@ -31,29 +31,29 @@ var start = [-123.12, 49.28];  // Example starting position (replace with your o
 // Create a function to make a directions request
 async function getRoute(end) {
   if (!end) return; // If no end coordinates are provided, do nothing
-
   
-
+  
+  
   // Step 1: Fetch points to avoid from Firestore
-  const avoidPoints = await getAvoidPointsFromFirestore(); 
-
+  const avoidPoints = await getAvoidPointsFromFirestore();
+  
   // Step 2: Construct the route coordinates from start and end
   const routeCoordinates = `${start[0]},${start[1]};${end[0]},${end[1]}`;
-
+  
   const url = `https://api.mapbox.com/directions/v5/mapbox/walking/${routeCoordinates}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`;
-
+  
   try {
     // Fetch route from Mapbox Directions API
     const query = await fetch(url, { method: 'GET' });
     const json = await query.json();
-
+    
     if (json.routes && json.routes.length > 0) {
       const data = json.routes[0];
       const route = data.geometry.coordinates;
-
+      
       // Step 3: Check if the route passes too close to any avoid points
       const adjustedRoute = await adjustRouteToAvoidPoints(route, avoidPoints);
-
+      
       // Step 4: Create the geojson route object
       const geojson = {
         type: 'Feature',
@@ -63,7 +63,7 @@ async function getRoute(end) {
           coordinates: adjustedRoute
         }
       };
-
+      
       // Update or add the route layer on the map
       if (map.getSource('route')) {
         map.getSource('route').setData(geojson);
@@ -94,20 +94,21 @@ async function getRoute(end) {
   }
 }
 
+
 // Function to fetch avoid points (addresses) from Firestore
 async function getAvoidPointsFromFirestore() {
   try {
     const db = firebase.firestore();
     const reportsCollection = db.collection('reports');
     const querySnapshot = await reportsCollection.get();
-
+    
     // Extract coordinates from Firestore addresses
     const avoidPoints = querySnapshot.docs.map(doc => {
       const address = doc.data().street;
       // Call geocoding service to convert address to coordinates
       return geocodeAddress(address);
     });
-
+    
     // Wait for all geocoding promises to resolve
     return Promise.all(avoidPoints);
   } catch (error) {
@@ -119,11 +120,11 @@ async function getAvoidPointsFromFirestore() {
 // Function to geocode an address (convert address to coordinates)
 async function geocodeAddress(address) {
   const geocodeUrl = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${mapboxgl.accessToken}`;
-
+  
   try {
     const response = await fetch(geocodeUrl);
     const data = await response.json();
-
+    
     if (data.features && data.features.length > 0) {
       // Return the coordinates of the first result
       return data.features[0].geometry.coordinates;
@@ -131,25 +132,28 @@ async function geocodeAddress(address) {
       console.error(`No coordinates found for address: ${address}`);
       return null;
     }
+    
   } catch (error) {
     console.error("Geocoding error:", error);
     return null;
   }
+  
+  
 }
 
 // Function to adjust the route (avoiding specific points)
 async function adjustRouteToAvoidPoints(routeCoordinates, avoidPoints) {
   const adjustedRoute = [];
-
+  
   // Loop through the route and check if any point is too close to avoid points
   for (let i = 0; i < routeCoordinates.length; i++) {
     const currentCoord = routeCoordinates[i];
     let isAvoided = false;
-
+    
     // Check each avoid point and see if the current route segment is too close
     for (let j = 0; j < avoidPoints.length; j++) {
       const avoidPoint = avoidPoints[j];
-
+      
       // Check if current point is close to avoid point (buffer zone logic)
       if (isPointClose(currentCoord, avoidPoint)) {
         // If too close, mark the point as "avoided"
@@ -157,7 +161,7 @@ async function adjustRouteToAvoidPoints(routeCoordinates, avoidPoints) {
         break;
       }
     }
-
+    
     if (!isAvoided) {
       // If not avoided, just push the current coordinate
       adjustedRoute.push(currentCoord);
@@ -168,24 +172,24 @@ async function adjustRouteToAvoidPoints(routeCoordinates, avoidPoints) {
       adjustedRoute.push(...detour); // Push detour points into the route
     }
   }
-
+  
   return adjustedRoute;
 }
 // Check if the current point is within a certain distance of the avoid point (buffer zone)
 function isPointClose(coord, avoidPoint) {
   const [lng, lat] = coord;
   const [avoidLng, avoidLat] = avoidPoint;
-
+  
   // Calculate distance (we'll use a simple Euclidean distance here, but a Haversine formula could work better)
   const distance = Math.sqrt(Math.pow(lng - avoidLng, 2) + Math.pow(lat - avoidLat, 2));
-
+  
   return distance < 0.01;  // 0.01 degrees approx. 1km, adjust this based on your needs (0.0001 is ~10 meters)
 }
 
 // Function to find a detour around an avoid point (simple implementation)
 function findDetourAroundAvoidPoint(coord, avoidPoints) {
   const detourPoints = [];
-
+  
   // Generate new route points that reroute around the avoid point.
   // Here you can apply custom logic to find a detour around the avoid point.
   
@@ -198,7 +202,7 @@ function findDetourAroundAvoidPoint(coord, avoidPoints) {
     [lng - 0.001, lat - 0.001], // Another detour point (simulated)
   ];
   
-
+  
   return detour;
 }
 
@@ -209,7 +213,7 @@ map.on('load', () => {
   if (searchedCoords) {
     getRoute(searchedCoords);
   }
-
+  
   // Add the starting point (user's location) to the map
   map.addLayer({
     id: 'point',
@@ -237,14 +241,52 @@ map.on('load', () => {
   });
 });
 
+function addMarkersLayer(coordinates) {
+  // Create a GeoJSON object from the coordinates array
+  const features = coordinates.map(coord => ({
+    type: 'Feature',
+    geometry: {
+      type: 'Point',
+      coordinates: [coord.lng, coord.lat], // GeoJSON format: [longitude, latitude]
+    },
+    properties: {
+      // Optional properties, e.g., name, description
+      name: coord.name || '',
+      description: coord.description || '',
+    },
+  }));
+
+  const geojson = {
+    type: 'FeatureCollection',
+    features: features,
+  };
+
+  // Add a circle layer to Mapbox with the GeoJSON data
+  map.addLayer({
+    id: 'address-markers',
+    type: 'circle',
+    source: {
+      type: 'geojson',
+      data: geojson, // GeoJSON data
+    },
+    paint: {
+      'circle-radius': 10,        
+      'circle-color': '#f30',     
+      'circle-opacity': 0.6,      
+    },
+  });
+}
+
+
 map.on('click', (event) => {
   // Get the coordinates of the clicked point on the map
   const coords = Object.keys(event.lngLat).map((key) => event.lngLat[key]);
-
+  
   // Update the end point with the clicked coordinates
   const end = {
     type: 'FeatureCollection',
     features: [
+      
       {
         type: 'Feature',
         properties: {},
@@ -296,12 +338,12 @@ function updateLocationWithGPS() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        
+
 
         //Updating the start var
         start = [position.coords.longitude, position.coords.latitude];
         console.log(start);
-        
+
 
         //Update the start point marker
         const startGeojson = {
