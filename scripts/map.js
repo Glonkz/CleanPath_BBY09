@@ -1,3 +1,9 @@
+import { getFirestore, collection, addDoc, Timestamp } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js';
+import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js';
+import { db } from './firebaseAPI_TEAM99'; 
+
+
 mapboxgl.accessToken = 'pk.eyJ1IjoianByaWNlOTE2IiwiYSI6ImNtODU0cWd1ODAwaDAybW9kNGJmdmcxdGwifQ.SzEpTyJxWWgcEt8cG2oF_A';
 const map = new mapboxgl.Map({
   container: 'map',
@@ -22,83 +28,82 @@ const start = [-123, 49.24]; // Example: starting position
 let searchedCoords = null; // to store the geocoded search result coordinates
 
 // Create a function to make a directions request
-async function getRoute(end, avoidPoints) {
+async function getRoute(end) {
   if (!end) return; // If no end coordinates are provided, do nothing
 
+  const db = firebase.firestore();
+    const reportsCollection = db.collection('reports'); // You can name the collection as you like.
 
+    // Add the address to Firestore
+    reportsCollection.add({
+        street: streetAddress,
+        timestamp: firebase.firestore.Timestamp.fromDate(new Date()) // Save timestamp of when the address was added
+    })
+    .then(() => {
+        console.log("Address successfully saved to Firestore!");
+    })
+    .catch((error) => {
+        console.error("Error saving address: ", error);
+    });
 
-
+  // Create the route coordinates from start and end
   const routeCoordinates = `${start[0]},${start[1]};${end[0]},${end[1]}`;
 
-  const firebaseAvoidPoints = await fetchAvoidPoints();
-  const allAvoidPoints = firebaseAvoidPoints.concat([avoidPoint]);
-
+  // Convert avoidPoints into the required waypoints format for Mapbox
   const waypoints = avoidPoints.map(point => `${point[0]},${point[1]}`).join(';');
 
-  const query = await fetch(
-    `https://api.mapbox.com/directions/v5/mapbox/walking/${routeCoordinates}&waypoints=${waypoints}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
-    { method: 'GET' }
-  );
-  const json = await query.json();
+  // Construct the Mapbox Directions API URL
+  const url = `https://api.mapbox.com/directions/v5/mapbox/walking/${routeCoordinates}?waypoints=${waypoints}&steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`;
 
-  // Handle the response and return the route
-  const data = json.routes[0];
-  const route = data.geometry.coordinates;
-
-  // Create the geojson route object
-  const geojson = {
-    type: 'Feature',
-    properties: {},
-    geometry: {
-      type: 'LineString',
-      coordinates: route
-    }
-  };
-
-  return geojson;
-
-
-
-  // If the route already exists on the map, we'll reset it using setData
-  if (map.getSource('route')) {
-    map.getSource('route').setData(geojson);
-  } else {
-    // Otherwise, we'll create a new route layer
-    map.addLayer({
-      id: 'route',
-      type: 'line',
-      source: {
-        type: 'geojson',
-        data: geojson
-      },
-      layout: {
-        'line-join': 'round',
-        'line-cap': 'round'
-      },
-      paint: {
-        'line-color': '#3887be',
-        'line-width': 5,
-        'line-opacity': 0.75
-      }
-    });
-  }
-}
-
-async function fetchAvoidPoints() {
-  const avoidPoints = [];
   try {
-    const snapshot = await db.collection('avoid_points').get();
-    snapshot.forEach(doc => {
-      const data = doc.data();
-      const point = [data.longitude, data.latitude];
-      avoidPoints.push(point);
-    });
-    return avoidPoints;
+    const query = await fetch(url, { method: 'GET' });
+    const json = await query.json();
+
+    if (json.routes && json.routes.length > 0) {
+      const data = json.routes[0];
+      const route = data.geometry.coordinates;
+
+      // Create the geojson route object
+      const geojson = {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'LineString',
+          coordinates: route
+        }
+      };
+
+      // If the route already exists on the map, we'll reset it using setData
+      if (map.getSource('route')) {
+        map.getSource('route').setData(geojson);
+      } else {
+        // Otherwise, we'll create a new route layer
+        map.addLayer({
+          id: 'route',
+          type: 'line',
+          source: {
+            type: 'geojson',
+            data: geojson
+          },
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round'
+          },
+          paint: {
+            'line-color': '#3887be',
+            'line-width': 5,
+            'line-opacity': 0.75
+          }
+        });
+      }
+    } else {
+      console.error("No route found.");
+    }
   } catch (error) {
-    console.error("Error fetching avoid points:", error);
-    return [];
+    console.error("Error fetching route:", error);
   }
 }
+
 
 
 map.on('load', () => {
@@ -280,4 +285,60 @@ map.addControl({
   }
 }, 'top-right');
 
+async function getAddressesAndPlotMarkers() {
+  // Get the Firestore collection reference
+  const db = firebase.firestore();
+  const reportsCollection = db.collection("reports");
 
+  try {
+      // Get all the documents from Firestore
+      const querySnapshot = await reportsCollection.get();
+
+      querySnapshot.forEach(async (doc) => {
+          const streetAddress = doc.data().street;
+          console.log(`Fetching coordinates for address: ${streetAddress}`);
+
+          // Geocode the address using Mapbox
+          const coordinates = await geocodeAddress(streetAddress);
+
+          if (coordinates) {
+              // Add the marker to the Map
+              addMarker(coordinates);
+          }
+      });
+  } catch (error) {
+      console.error("Error fetching reports: ", error);
+  }
+}
+
+
+async function geocodeAddress(address) {
+  const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${mapboxgl.accessToken}`;
+
+  try {
+      const response = await fetch(url);
+      const data = await response.json();
+
+      // Check if we got any results
+      if (data.features && data.features.length > 0) {
+          const { center } = data.features[0];  // Extract coordinates (longitude, latitude)
+          return { longitude: center[0], latitude: center[1] };
+      } else {
+          console.error("Address not found:", address);
+          return null;
+      }
+  } catch (error) {
+      console.error("Error geocoding address:", error);
+      return null;
+  }
+}
+
+
+function addMarker(coordinates) {
+  // Add a marker at the coordinates on the map
+  new mapboxgl.Marker()
+      .setLngLat([coordinates.longitude, coordinates.latitude])
+      .addTo(map);
+}
+
+getAddressesAndPlotMarkers();
