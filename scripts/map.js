@@ -1,3 +1,8 @@
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
+import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js';
+import { getAuth } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js';
+
+
 mapboxgl.accessToken = 'pk.eyJ1IjoianByaWNlOTE2IiwiYSI6ImNtODU0cWd1ODAwaDAybW9kNGJmdmcxdGwifQ.SzEpTyJxWWgcEt8cG2oF_A';
 const map = new mapboxgl.Map({
   container: 'map',
@@ -22,88 +27,107 @@ const start = [-123, 49.24]; // Example: starting position
 let searchedCoords = null; // to store the geocoded search result coordinates
 
 // Create a function to make a directions request
-async function getRoute(end, avoidPoints) {
+async function getRoute(end) {
   if (!end) return; // If no end coordinates are provided, do nothing
 
+  // Fetch avoid points from Firebase
+  const avoidPoints = await fetchAvoidPoints(); // Get avoid points from Firebase
 
+  // Add the end point to avoid list if necessary
+  const allAvoidPoints = avoidPoints.concat([[end[0], end[1]]]);
 
+  // Convert avoid points to a semicolon-separated string for Mapbox API
+  const waypoints = allAvoidPoints.map(point => `${point[0]},${point[1]}`).join(';');
 
+  // Construct the directions query
   const routeCoordinates = `${start[0]},${start[1]};${end[0]},${end[1]}`;
 
-  const firebaseAvoidPoints = await fetchAvoidPoints();
-  const allAvoidPoints = firebaseAvoidPoints.concat([avoidPoints]);
-
-  const waypoints = avoidPoints.map(point => `${point[0]},${point[1]}`).join(';');
-
-  const query = await fetch(
-    `https://api.mapbox.com/directions/v5/mapbox/walking/${routeCoordinates}&waypoints=${waypoints}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
-    { method: 'GET' }
-  );
-  const json = await query.json();
-
-  // Handle the response and return the route
-  const data = json.routes[0];
-  const route = data.geometry.coordinates;
-
-  // Create the geojson route object
-  const geojson = {
-    type: 'Feature',
-    properties: {},
-    geometry: {
-      type: 'LineString',
-      coordinates: route
-    }
-  };
-
-  return geojson;
-
-
-
-  // If the route already exists on the map, we'll reset it using setData
-  if (map.getSource('route')) {
-    map.getSource('route').setData(geojson);
-  } else {
-    // Otherwise, we'll create a new route layer
-    map.addLayer({
-      id: 'route',
-      type: 'line',
-      source: {
-        type: 'geojson',
-        data: geojson
-      },
-      layout: {
-        'line-join': 'round',
-        'line-cap': 'round'
-      },
-      paint: {
-        'line-color': '#3887be',
-        'line-width': 5,
-        'line-opacity': 0.75
-      }
-    });
-  }
-}
-
-async function fetchAvoidPoints() {
-  const avoidPoints = [];
   try {
-    const snapshot = await db.collection('avoid_points').get();
-    snapshot.forEach(doc => {
-      const data = doc.data();
-      const point = [data.longitude, data.latitude];
-      avoidPoints.push(point);
-    });
-    return avoidPoints;
+    const query = await fetch(
+      `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${start[0]},${start[1]};${end[0]},${end[1]}?waypoints=${waypoints}&steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
+      { method: 'GET' }
+    );
+
+    const json = await query.json();
+
+    // If the route response exists
+    if (json.routes && json.routes.length > 0) {
+      const data = json.routes[0];
+      const route = data.geometry.coordinates;
+
+      // Create the GeoJSON route object
+      const geojson = {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'LineString',
+          coordinates: route
+        }
+      };
+
+      // If the route already exists on the map, we'll reset it using setData
+      if (map.getSource('route')) {
+        map.getSource('route').setData(geojson);
+      } else {
+        // Otherwise, we'll create a new route layer
+        map.addLayer({
+          id: 'route',
+          type: 'line',
+          source: {
+            type: 'geojson',
+            data: geojson
+          },
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round'
+          },
+          paint: {
+            'line-color': '#3887be',
+            'line-width': 5,
+            'line-opacity': 0.75
+          }
+        });
+      }
+    } else {
+      console.error("No route found");
+    }
   } catch (error) {
-    console.error("Error fetching avoid points:", error);
-    return [];
+    console.error("Error fetching route:", error);
   }
 }
+
+// Function to fetch avoid points from Firebase
+async function fetchAvoidPoints() {
+  const user = firebase.auth().currentUser;
+  if (user) {
+
+    const avoidPoints = [];
+    try {
+      const snapshot = await db.collection('reports').get();
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const point = [data.longitude, data.latitude];
+        avoidPoints.push(point);
+      });
+      return avoidPoints;
+    } catch (error) {
+      console.error("Error fetching avoid points from Firebase:", error);
+      return [];
+    }
+  } else {
+    console.error("User not authenticated");
+  }
+
+}
+
+
+
 
 
 
 
 map.on('load', () => {
+  
   // Initial directions request that starts and ends at the searched coordinates
   if (searchedCoords) {
     getRoute(searchedCoords);
@@ -245,7 +269,7 @@ function updateLocationWithGPS() {
   } else {
     alert('Geolocation is not supported by your browser.');
   }
-  getRoute(endCoords);
+  getRoute(searchedCoords);
 
 }
 
