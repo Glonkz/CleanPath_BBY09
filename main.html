@@ -33,7 +33,7 @@
     <!-------------------------------------------->
     <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
     <link rel="stylesheet" href="./styles/style.css">
-    <link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./images/logo.ico" type="image/x-icon">
 
 </head>
 
@@ -43,40 +43,46 @@
     <!------------------------------>
 
     <!-- our own navbar goes here -->
-    <nav class="navbar navbar-expand-lg bg-primary rounded-2">
+    <nav class="navbar navbar-expand-lg bg-primary">
         <div class="container-fluid">
-          <a class="navbar-brand" href="./index.html"><span class="nav-title">CleanPath</span></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Navigation</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Bookmarks</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Settings</a>
-              </li>
-            </ul>
+          <a class="navbar-brand" href="./main.html"><span class="nav-title">CleanPath</span></a>
+          
+          <div class="logout">
+            <a href="../index.html">Logout</a>
           </div>
+            
         </div>
+          <div class="bottom-nav">
+            <div class="nav-item">
+              <a class="nav-link active" aria-current="page" href="./main.html">Home</a>
+            </div>
+            <div class="nav-item">
+              <a class="nav-link" href="./map.html">Navigation</a>
+            </div>
+            <div class="nav-item">
+              <a class="nav-link" href="./settings.html">Settings</a>
+            </div>
+          </div>
     </nav>
 
-    <div class="container-fluid bg-light text-dark p-">
-        <div class="container bg-light p-5">
-            <h1 class="display-4">Good morning,<span id="name-goes-here"></span></h1>
-            <hr>
-            <p>Quote of the day: The best view comes after the hardest climb.</p>
-        </div>
-    </div>
+    
     <!-- the body of your page goes here -->
     <!-- stuff -->
+    <div class="container-fluid bg-light text-dark p-">
+      <div class="container bg-light p-5">
+          <h1 class="display-4">Good morning, <span id="name-goes-here"></span></h1>
+          <hr>
+          <p>Glad you could join us on this journey to keep the Earth more green!!!</p>
+
+          <p id="currentCarbonScore">Current Carbon Score: Loading...</p>
+          <p id="weeklyCarbonScore">Weekly Carbon Score: Loading...</p>
+          <p id="totalCarbonScore">Total Carbon Score: Loading...</p>
+          
+      </div>
+  </div>
+
+
+
 
     <!-- our own footer goes here-->
     <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
@@ -92,7 +98,7 @@
     <!---------------------------------------------->
     <!-- Your own JavaScript functions go here    -->
     <!---------------------------------------------->
-    <script src="./scripts/project09.js"></script>
+    <script src="./scripts/firebaseAPI_TEAM99.js"></script>
     <script src="./scripts/skeleton.js"></script>
     <script src="./scripts/main.js"></script>
 </body>

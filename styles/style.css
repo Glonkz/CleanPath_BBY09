@@ -33,15 +33,18 @@
 
 body {
     background-color: #E8F3E9;
+    padding: 0px;
+    margin: 0px;
 }
 
 .bg-primary {
-    background-color: #9DC895 !important;
+    background-color: #5e6f5ee8 !important;
 }
 
 .btn-warning {
-    background-color: #9DC895;
-    border-color: #77b46c;
+    background-color: #5e6f5e;
+    border-color: #5e6f5e;
+    color: #c1eaba;
 }
 
 .dropdown-menu {
@@ -49,11 +52,176 @@ body {
 }
 
 .btn-warning:hover {
-    background-color: #77b46c !important;
-    border-color: #77b46c !important;
+    background-color: #E8F3E9 !important;
+    border-color: #3c493a !important;
+}
+
+.navbar {
+    border-radius: 0px;
 }
 
 .nav-title {
-    color: #596a56;
+    color: #b0d1b0;
     font-size: 22pt;
+}
+
+div.bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    background-color: #5e6f5ee8;
+    height: 50px;
+    width: 100%;
+    border-radius: 2px;
+}
+
+div.nav-item {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-self: center;
+    color: #b0d1b0;
+}
+
+div.logout {
+    border: solid #93b093;
+    border-radius: 8px;
+    padding: 3px;
+}
+
+a {
+    color: #a1c0a1;
+    text-decoration: none;
+}
+
+div.logout:hover {
+    cursor: pointer;
+    color: hsl(115, 31%, 76%);
+    background-color: #748371;
+}
+
+#map {
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    width: 100%;
+    height: auto;
+    border: #5e6f5e solid 2px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px rgba(4, 3, 3, 0.433);
+}
+
+    a.mapboxgl-ctrl-logo {
+        display: none;
+    }
+
+
+/* iframe {
+    background-color:#819a7d;
+    border-radius: 4px;
+} */
+
+footer.d-flex {
+    width: 100%;
+    bottom: 18px;
+    left: 8px;
+    position: fixed;
+}
+
+div.container {
+    margin-top: 100px;
+}
+
+div.settingContainer {
+    position: relative;
+    background-color: #748671;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px rgba(4, 3, 3, 0.433);
+    margin: 10px;
+    padding: 10px;
+    overflow-y: auto;
+    height: 620px;
+    color: #2d362d;
+}
+
+button#user-tab.nav-link, button#carbon-tab.nav-link, button#contact-tab.nav-link {
+    color: hsl(113, 11%, 45%);
+}
+
+button#user-tab.nav-link:hover, button#carbon-tab.nav-link:hover, button#contact-tab.nav-link:hover {
+    color: hsl(115, 31%, 76%);
+    background-color: #748371;
+}
+
+#user-tab.nav-link.active, #carbon-tab.nav-link.active, #contact-tab.nav-link.active {
+    background-color: #262926;
+}
+
+#ctl05_ddlCarMake, #ctl05_ddlCarModel, #ctl05_ddlCarDerivative {
+    width: 90px;
+}
+
+input#consumption, input#distance, input#address {
+    width: 150px;
+    background-color: #7a8b77;
+    border-radius: 10px;
+    border-color: #748671;
+    box-shadow: 0px 5px 10px rgba(4, 3, 3, 0.231);
+    margin: 10px;
+    color: #c8f0c8;
+}
+
+input#consumption:hover, input#distance:hover, input#address:hover {
+    background-color: #5e6f5e;
+}
+
+input::placeholder {
+    color: #b0d1b0;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+    border-color: #9ebc9e;
+    outline: none;
+}
+
+button, button.editUser, button.saveUser {
+    background-color: #5e6f5e;
+    border-radius: 10px;
+    border-color: #748671;
+    box-shadow: 0px 5px 10px rgba(4, 3, 3, 0.11);
+    margin: 3px;
+    color: #2d362d;
+}
+
+button:hover, button.editUser:hover, button.saveUser:hover {
+    background-color: #748671;
+    color: #b0d1b0;
+}
+
+form#emissionForm {
+    margin-bottom: 20px;
+}
+
+div.settingContainer h1, div.settingContainer h2 {
+    background-color: #5e6f5e;
+    width: fit-content;
+    border-radius: 5px;
+    padding: 5px;
+    padding-left: 6px;
+    padding-right: 6px;
+    box-shadow: 0px 5px 10px rgba(4, 3, 3, 0.298);
+}
+
+p#carbonResults {
+    font-weight: bold;
+    font-size: large;
+    color: #bce6bc;
+    text-decoration: underline;
+}
+
+#currentCarbonScore, #weeklyCarbonScore, #totalCarbonScore {
+    font-weight: bold;
+    font-size: large;
+    color: #4d634d;
+    text-decoration: underline;
 }
