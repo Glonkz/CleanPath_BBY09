@@ -31,7 +31,7 @@ async function getRoute(end, avoidPoints) {
   const routeCoordinates = `${start[0]},${start[1]};${end[0]},${end[1]}`;
 
   const firebaseAvoidPoints = await fetchAvoidPoints();
-  const allAvoidPoints = firebaseAvoidPoints.concat([avoidPoint]);
+  const allAvoidPoints = firebaseAvoidPoints.concat([avoidPoints]);
 
   const waypoints = avoidPoints.map(point => `${point[0]},${point[1]}`).join(';');
 
@@ -99,6 +99,8 @@ async function fetchAvoidPoints() {
     return [];
   }
 }
+
+
 
 
 map.on('load', () => {
@@ -246,6 +248,9 @@ function updateLocationWithGPS() {
   getRoute(endCoords);
 
 }
+
+
+
 
 // Create a custom control with a logo
 const gpsControl = document.createElement('div');
