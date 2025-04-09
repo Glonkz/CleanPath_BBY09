@@ -1,3 +1,10 @@
+// Import Firestore functions from Firebase
+import { collection, addDoc, Timestamp } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js';
+import { db } from './firebaseAPI_TEAM99.js';
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js';
+import { getFirestore} from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js';
+import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js';
+
 //Emisson factor (kg, C02/L)
 const emissionFactors = {
     gasoline: 2.31,
@@ -104,29 +111,40 @@ function resetForm() {
     document.getElementById("carbonResults").innerText = "";
 }
 
+
+
 //function to make the report system work
-function report() {
-    const btn = document.getElementById("reportForm");
+async function report() {
     const txt = document.getElementById("address");
     const streetAddress = txt.value;
 
+    if (streetAddress != null){
+        try {
+            // Get Firestore collection reference
+            const reportsCollection = collection(db, "reports");
     
+            // Add the document to Firestore
+            await addDoc(reportsCollection, {
+                street: streetAddress,
+                timestamp: Timestamp.fromDate(new Date()) // Firestore will handle the timestamp
+            });
+    
+            console.log("Report successfully saved!");
+            console.log("Street Address: ", streetAddress);
+    
+        } catch (error) {
+            console.error("Error saving report: ", error);
+        }
+    } else {
+        console.log("no address")
+    }
 
-
-    // Set the report in Firestore
-    db.collection("reports").add({
-        street: streetAddress,
-        timestamp: firebase.firestore.Timestamp.fromDate(new Date())
-    })
-    .then(() => {
-        console.log("Report successfully saved!");
-    })
-    .catch((error) => {
-        console.error("Error saving report: ", error);
-    });
+    
 }
 
+const repButn = document.getElementById("reportForm");
+repButn.addEventListener("click", report)
 
 //Needs work, dont put code at the top unless it works.
 //Messes up the calculate button for emissions.
-// const Address = require("ipaddr.js");
+

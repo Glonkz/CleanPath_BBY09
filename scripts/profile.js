@@ -2,33 +2,42 @@ var currentUser;          //put this right after you start script tag before wri
 
 var currentUser;               //points to the document of the user who is logged in
 function populateUserInfo() {
-    firebase.auth().onAuthStateChanged(user => {
-        // Check if user is signed in:
-        if (user) {
+    // Use onAuthStateChanged with the new modular API
+    onAuthStateChanged(auth, (user) => {
+      // Check if the user is signed in
+      if (user) {
+        // Reference to the user's document in Firestore
+        const currentUser = doc(db, "users", user.uid);
+        
+        // Get the user document
+        getDoc(currentUser)
+          .then((userDoc) => {
+            // Check if the document exists and retrieve the data
+            if (userDoc.exists()) {
+              const userData = userDoc.data();
+              const userName = userData.name;
+              const userCity = userData.city;
 
-            //go to the correct user document by referencing to the user uid
-            currentUser = db.collection("users").doc(user.uid)
-            //get the document for current user.
-            currentUser.get()
-                .then(userDoc => {
-                    //get the data fields of the user
-                    let userName = userDoc.data().name;
-                    let userCity = userDoc.data().city;
-
-                    //if the data fields are not empty, then write them in to the form.
-                    if (userName != null) {
-                        document.getElementById("nameInput").value = userName;
-                    }
-                    if (userCity != null) {
-                        document.getElementById("cityInput").value = userCity;
-                    }
-                })
-        } else {
-            // No user is signed in.
-            console.log("No user is signed in");
-        }
+              // If the fields are not empty, populate the form
+              if (userName) {
+                document.getElementById("nameInput").value = userName;
+              }
+              if (userCity) {
+                document.getElementById("cityInput").value = userCity;
+              }
+            } else {
+              console.log("No user document found.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error getting user document: ", error);
+          });
+      } else {
+        // No user is signed in
+        console.log("No user is signed in");
+      }
     });
-}
+  }
 
 //call the function to run it 
 populateUserInfo();

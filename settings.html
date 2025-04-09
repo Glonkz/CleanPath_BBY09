@@ -23,19 +23,24 @@
 
   <!-- Firebase 8 Library related CSS, JS, JQuery go here -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
   <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+ 
 
   <!-------------------------------------------->
   <!-- Other libraries and styles of your own -->
   <!-------------------------------------------->
   <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+
+
+
   <link rel="stylesheet" href="./styles/style.css">
   <link rel="icon" href="./images/logo.ico" type="image/x-icon">
+
+  
 
 
 </head>
@@ -87,19 +92,19 @@
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="user-tab-pane" role="tabpanel" aria-labelledby="user-tab" tabindex="0">
         <h1>User Profile </h1>
-          <fieldset class="mb-3" id="personalInfoFields" disabled>
-            <div class="form-group">
-              <label>Name</label>
-              <input type="text" id="nameInput" class="form-control" placeholder="Enter your name">
-            </div>
-            <label>City</label>
-            <input type="text" id="cityInput" class="form-control" placeholder="Enter your city">
-          </fieldset>
-          <div class="d-flex justify-content-end mt-5">
-            <button type="button" class="editUser" onclick="editUserInfo()">Edit</button>
-            <span style="width: 10px"></span>
-            <button type="button" class="saveUser" onclick="saveUserInfo()">Save</button>
+        <fieldset class="mb-3" id="personalInfoFields" disabled>
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" id="nameInput" class="form-control" placeholder="Enter your name">
           </div>
+          <label>City</label>
+          <input type="text" id="cityInput" class="form-control" placeholder="Enter your city">
+        </fieldset>
+        <div class="d-flex justify-content-end mt-5">
+          <button type="button" class="editUser" onclick="editUserInfo()">Edit</button>
+          <span style="width: 10px"></span>
+          <button type="button" class="saveUser" onclick="saveUserInfo()">Save</button>
+        </div>
       </div>
     </div>
 
@@ -126,7 +131,7 @@
       <form>
         <h3>Report Carbon</h3>
         <input type="text" required placeholder="Enter an address" id="address">
-        <button type="button" id="reportForm" onclick="report()">
+        <button type="button" id="reportForm" >
           <h4>Report</h4>
         </button>
       </form>
@@ -146,11 +151,10 @@
   <!---------------------------------------------->
   <!-- Your own JavaScript functions go here    -->
   <!---------------------------------------------->
-  <script src="./scripts/firebaseAPI_TEAM99.js"></script>
-  <script src="./scripts/skeleton.js"></script>
+  <script type="module" src="./scripts/firebaseAPI_TEAM99.js"></script>
   <script src="./scripts/main.js"></script>
-  <script src="./scripts/emissions.js"></script>
-  <script src="./scripts/profile.js"></script>
+  <script type="module" src="./scripts/emissions.js"></script>
+
 </body>
 
 </html>
