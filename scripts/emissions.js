@@ -110,20 +110,22 @@ function report() {
     const txt = document.getElementById("address");
     const streetAddress = txt.value;
 
-    btn.onclick();
-
-    const user = firebase.auth().currentUser;
+    
 
 
-    // This doesnt work for some god forsaken reason.
-
-    db.collection("reports").doc(user.uid).set({
-        // street: txt.innerHTML, <- Your code
+    // Set the report in Firestore
+    db.collection("reports").add({
         street: streetAddress,
-        userId: user.uid,
         timestamp: firebase.firestore.Timestamp.fromDate(new Date())
     })
+    .then(() => {
+        console.log("Report successfully saved!");
+    })
+    .catch((error) => {
+        console.error("Error saving report: ", error);
+    });
 }
+
 
 //Needs work, dont put code at the top unless it works.
 //Messes up the calculate button for emissions.

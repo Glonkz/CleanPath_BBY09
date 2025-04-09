@@ -3,7 +3,6 @@ const map = new mapboxgl.Map({
   container: 'map',
   // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
   style: 'mapbox://styles/mapbox/streets-v11',
-
   center: [-123., 49.24],
   zoom: 13
 });
@@ -18,13 +17,17 @@ const geocoder = new MapboxGeocoder({
   mapboxgl: mapboxgl
 });
 
-const start = [-123, 49.24];
-// create a function to make a directions request
+// Define your starting position (this could be user's location or a fixed point)
+const start = [-123, 49.24]; // Example: starting position
+let searchedCoords = null; // to store the geocoded search result coordinates
+
+// Create a function to make a directions request
 async function getRoute(end) {
+  if (!end) return; // If no end coordinates are provided, do nothing
+
   const query = await fetch(
     `https://api.mapbox.com/directions/v5/mapbox/driving-traffic/${start[0]},${start[1]};${end[0]},${end[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`,
-    { method: 'GET' },
-
+    { method: 'GET' }
   );
   const json = await query.json();
   const data = json.routes[0];
@@ -37,12 +40,12 @@ async function getRoute(end) {
       coordinates: route
     }
   };
-  // if the route already exists on the map, we'll reset it using setData
+
+  // If the route already exists on the map, we'll reset it using setData
   if (map.getSource('route')) {
     map.getSource('route').setData(geojson);
-  }
-  // otherwise, we'll make a new request
-  else {
+  } else {
+    // Otherwise, we'll create a new route layer
     map.addLayer({
       id: 'route',
       type: 'line',
@@ -64,11 +67,12 @@ async function getRoute(end) {
 }
 
 map.on('load', () => {
-  // make an initial directions request that
-  // starts and ends at the same location
-  getRoute(userCoords);
+  // Initial directions request that starts and ends at the searched coordinates
+  if (searchedCoords) {
+    getRoute(searchedCoords);
+  }
 
-  // Add starting point to the map
+  // Add the starting point (user's location) to the map
   map.addLayer({
     id: 'point',
     type: 'circle',
@@ -82,7 +86,7 @@ map.on('load', () => {
             properties: {},
             geometry: {
               type: 'Point',
-              coordinates: userCoords
+              coordinates: start
             }
           }
         ]
@@ -96,8 +100,10 @@ map.on('load', () => {
 });
 
 map.on('click', (event) => {
-
+  // Get the coordinates of the clicked point on the map
   const coords = Object.keys(event.lngLat).map((key) => event.lngLat[key]);
+  
+  // Update the end point with the clicked coordinates
   const end = {
     type: 'FeatureCollection',
     features: [
@@ -111,27 +117,18 @@ map.on('click', (event) => {
       }
     ]
   };
+
+  // If the "end" layer already exists, update its coordinates
   if (map.getLayer('end')) {
     map.getSource('end').setData(end);
   } else {
+    // Otherwise, add a new "end" point layer on the map
     map.addLayer({
       id: 'end',
       type: 'circle',
       source: {
         type: 'geojson',
-        data: {
-          type: 'FeatureCollection',
-          features: [
-            {
-              type: 'Feature',
-              properties: {},
-              geometry: {
-                type: 'Point',
-                coordinates: coords
-              }
-            }
-          ]
-        }
+        data: end
       },
       paint: {
         'circle-radius': 10,
@@ -139,9 +136,21 @@ map.on('click', (event) => {
       }
     });
   }
-  getRoute(coords);
+
+  // Now pass the newly clicked coordinates as the endpoint to getRoute
+  getRoute(coords); // Use the new destination (coords) as the endpoint
 });
+
+// Add geocoder control to the map
 map.addControl(geocoder);
+
+// Geocoder event to store the searched position coordinates
+geocoder.on('result', function(event) {
+  searchedCoords = event.result.geometry.coordinates;
+  // Optionally, you can call getRoute here to immediately show a route to the searched location
+  getRoute(searchedCoords);
+});
+
 
 
 //GPS function.
@@ -199,6 +208,8 @@ function updateLocationWithGPS() {
   } else {
     alert('Geolocation is not supported by your browser.');
   }
+  getRoute(endCoords); 
+  
 }
 
 // Create a custom control with a logo
