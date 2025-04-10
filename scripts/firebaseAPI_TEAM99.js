@@ -32,8 +32,8 @@ var mapApiConfig = {
 //--------------------------------------------
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
+const auth = getAuth(app);
 // Initialize Firestore (if using Firestore)
 const db = getFirestore(app);
 
-export {db};
+export {auth, db};

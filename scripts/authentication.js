@@ -1,3 +1,6 @@
+import { auth, db } from "./firebaseAPI_TEAM99.js"
+import { EmailAuthProvider ,getAdditionalUserInfo} from 'firebase/auth'; 
+import {doc,setDoc,runTransaction} from 'firebase/firestore';
 // Initialize the FirebaseUI Widget using Firebase.
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
@@ -54,7 +57,7 @@ var uiConfig = {
                 day: getCurrentDay()
             };
 
-            const userRef = db.collection("users").doc(user.uid);
+            const userRef = doc(db, "users", user.uid);
 
             if (authResult.additionalUserInfo.isNewUser) {
                 //Creates their new document for a new user
@@ -68,7 +71,7 @@ var uiConfig = {
                     });
             } else {
                 //Checks if we need to reset weeklyCarbonScore and currentScore
-                db.runTransaction(transaction => {
+                runTransaction(db, async (transaction) => {
                     return transaction.get(userRef).then(doc => {
                         if (!doc.exists) {
                             //If the document doesn't exist, create it

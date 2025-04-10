@@ -112,7 +112,7 @@ async function getAvoidPointsFromFirestore() {
     // Wait for all geocoding promises to resolve
     return Promise.all(avoidPoints);
   } catch (error) {
-    console.error("Error fetching avoid points from Firestore:", error);
+    console.error("Error fetching avoid points", error);
     return [];
   }
 }
