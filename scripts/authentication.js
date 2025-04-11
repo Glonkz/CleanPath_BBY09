@@ -1,6 +1,6 @@
 import { auth, db } from "./firebaseAPI_TEAM99.js"
-import { EmailAuthProvider ,getAdditionalUserInfo} from 'firebase/auth'; 
-import {doc,setDoc,runTransaction} from 'firebase/firestore';
+import { EmailAuthProvider ,getAdditionalUserInfo} from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js'; 
+import {doc,setDoc,runTransaction} from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js';
 // Initialize the FirebaseUI Widget using Firebase.
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
 
